@@ -10,7 +10,7 @@
 
     @foreach ($posts as $post)
     
-       @include('components.post', compact('post'));
+       @include('components.post', compact('post', 'user'));
        
     @endforeach
 
