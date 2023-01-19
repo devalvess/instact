@@ -26,6 +26,8 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+
+    try {
         $user = auth()->user();
  
         $path = $request->photo->store('public/images');
@@ -35,9 +37,16 @@ class PostController extends Controller
             'description' => $request->description,
             'user_id' => $user->id
         ]);
+
+        logger()->notice('Um Post foi feito por ' . $user->name);
  
         return redirect('/');
+    } catch (\Throwable $th) {
+        logger()->error($th);
+        abort(500);
     }
+    
+ }
  
     /**
      * Display the specified resource.
